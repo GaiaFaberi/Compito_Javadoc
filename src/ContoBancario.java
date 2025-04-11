@@ -2,7 +2,13 @@
  * Questa classe rappresenta un conto bancario
  */
 public class ContoBancario extends Object{
+    /**
+     * L'iban del conto bancario
+     */
     protected String iban = "";
+    /**
+     * il saldo del conto bancario
+     */
     protected double saldo = 0.0;
 
     /**
