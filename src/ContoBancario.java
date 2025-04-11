@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Questa classe rappresenta un conto bancario
  */
@@ -12,6 +14,11 @@ public class ContoBancario extends Object{
     protected double saldo = 0.0;
 
     /**
+     * lista degli ultimi movimenti
+     */
+    protected ArrayList<String> movimenti = new ArrayList<>() ;
+
+    /**
      * Costruttore che inizializza il conto bancario con un iban e un saldo
      * @param iban  il numero del conto bancario
      * @param saldo il saldo iniziale del conto bancario
@@ -21,6 +28,13 @@ public class ContoBancario extends Object{
         this.saldo = saldo;
     }
 
+    /**
+     * Restituisce la lista dei movimenti del conto bancario.
+     * @return la lista dei movimenti del conto bancario
+     */
+    public ArrayList<String> getMovimenti(){
+        return movimenti;
+    }
     
     /**
      * Questo metodo deposita una somma di denaro sul conto bancario, incrementando il saldo
@@ -32,6 +46,7 @@ public class ContoBancario extends Object{
             throw new IllegalArgumentException("L'importo non può essere negativo.");
         }
         this.saldo += importo;
+        this.movimenti.add("+ " + importo);
     }
 
     /**
@@ -60,6 +75,7 @@ public class ContoBancario extends Object{
             throw new IllegalArgumentException("Il prelievo non può essere maggiore del saldo o saldo negativo");
         }
         this.saldo -= importo;
+        this.movimenti.add("- " + importo);
     }
 
     /**
@@ -68,5 +84,18 @@ public class ContoBancario extends Object{
     @Override
     public String toString() {
         return "Conto bancario: \n" + this.iban + "\n Saldo: \n" + this.saldo;
+    }
+
+    /**
+     * Restituisce gli ultimi n movimenti del conto bancario.
+     * @param n il numero di movimenti da restituire
+     * @return gli ultimi n movimenti del conto bancario
+     */
+    public ArrayList<String> getUltimiMovimenti(int n){
+        ArrayList<String> ultimiMovimenti = new ArrayList<>();
+        for(int i = movimenti.size(); i > n; i--){
+            ultimiMovimenti.add(movimenti.get(i));
+        }
+        return ultimiMovimenti;
     }
 }
